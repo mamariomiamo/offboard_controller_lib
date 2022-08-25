@@ -4,8 +4,11 @@
 #include <unistd.h>
 #include <chrono>
 
-int main()
+int main(int argc, char** argv)
 {
+    double voltage = 11.1;
+    if(argc > 1)
+        voltage = std::stod(argv[1]);
     double mass = 195.5; 
     Eigen::Vector3d pos_gain = Eigen::Vector3d(1.0, 1.0, 1.0);
     Eigen::Vector3d vel_gain = Eigen::Vector3d(1.0, 1.0, 1.0); 
@@ -39,9 +42,9 @@ int main()
             exit = true;
 
         
-        acc_des = controller.calDesiredAcceleration(Eigen::Vector3d(0.0, 0.0, 0.0), Eigen::Vector3d(0.0, 0.0, 0.0), Eigen::Vector3d(0.0, 0.0, 9.8));
+        acc_des = controller.calDesiredAcceleration(Eigen::Vector3d(0.0, 0.0, 0.0), Eigen::Vector3d(0.0, 0.0, 0.0), Eigen::Vector3d(0.0, 0.0, 0.0));
         att_des = controller.calDesiredAttitude(acc_des, 0.0);
-        throttle_des = controller.calDesiredThrottle(acc_des, Eigen::Vector4d(0.0,0.0,0.0,-1), 11.1, true);
+        throttle_des = controller.calDesiredThrottle(acc_des, Eigen::Vector4d(0.0,0.0,0.0,-1), voltage, true);
         std::cout << "computed throttle is " << throttle_des << std::endl;
         sleep(1);
     }
