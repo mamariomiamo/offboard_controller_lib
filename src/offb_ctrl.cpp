@@ -1,5 +1,4 @@
 #include "offb_ctrl.h"
-
 namespace offboard_controller
 {
     OffbCtrl::OffbCtrl(double mass,
@@ -25,7 +24,7 @@ namespace offboard_controller
         m_b_ = thrust_coeff[1];
         m_c_ = thrust_coeff[2];
         volt_k_ = volt_coeff[0];
-        volt_k_ = volt_coeff[1];
+        volt_b_ = volt_coeff[1];
     }
 
     void OffbCtrl::setPosGains(Eigen::Vector3d pos_gain)
