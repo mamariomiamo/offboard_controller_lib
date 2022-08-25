@@ -8,6 +8,7 @@ namespace offboard_controller
                        std::vector<double> volt_coeff,
                        double max_acc,
                        double throttle_offset,
+                       double throttle_limit,
                        std::vector<double> thrust_original) :
 
                                                               mass_(mass),
@@ -17,6 +18,7 @@ namespace offboard_controller
                                                               volt_coeff_(volt_coeff),
                                                               max_acc_(max_acc),
                                                               throttle_offset_(throttle_offset),
+                                                              throttle_limit_(throttle_limit),
                                                               thrust_original_(thrust_original)
     {
         gravity_ = Eigen::Vector3d{0.0, 0.0, -9.81};
@@ -73,10 +75,10 @@ namespace offboard_controller
             double force_gram_per_motor = acc_body * mass_ / 9.81 / 4; // convert to force in grams per motor
             double cmd_theoretical = (-m_b_ + sqrt(pow(m_b_, 2) - 4 * m_a_ * (m_c_ - force_gram_per_motor))) / (2 * m_a_);
             double ratio = battery_volt * volt_k_ + volt_b_;
-            throttle = (cmd_theoretical - 0.06) * ratio;
+            throttle = (cmd_theoretical - throttle_offset_) * ratio;
         }
 
-        return throttle;
+        return std::max(0.0, std::min(throttle_limit_, throttle));  // Limit throttle
     }
 
 } // namespace offboard_controller

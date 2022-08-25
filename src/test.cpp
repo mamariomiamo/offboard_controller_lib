@@ -16,8 +16,9 @@ int main(int argc, char** argv)
     std::vector<double> volt_coeff{-0.1088, 2.1964};
     double max_acc{10.0};
     double throttle_offset{0.06};
+    double throttle_limit{0.5};
     std::vector<double> thrust_original{0.02, 0.01};
-    offboard_controller::OffbCtrl controller(mass, pos_gain, vel_gain, thrust_coeff, volt_coeff, max_acc, throttle_offset, thrust_original);
+    offboard_controller::OffbCtrl controller(mass, pos_gain, vel_gain, thrust_coeff, volt_coeff, max_acc, throttle_offset, throttle_limit, thrust_original);
 
     // std::cout << "mass is: " << controller.getMass() << std::endl;
     // std::cout << "pos gain is: " << controller.getPosGains() << std::endl;

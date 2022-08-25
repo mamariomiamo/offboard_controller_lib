@@ -22,6 +22,7 @@ namespace offboard_controller
         double volt_k_, volt_b_;
         double max_acc_;
         double throttle_offset_;
+        double throttle_limit_;
 
     public:
         OffbCtrl(double mass,
@@ -31,6 +32,7 @@ namespace offboard_controller
                  std::vector<double> volt_coeff,
                  double max_acc,
                  double throttle_offset,
+                 double throttle_limit,
                  std::vector<double> thrust_original);
 
         ~OffbCtrl() = default;
