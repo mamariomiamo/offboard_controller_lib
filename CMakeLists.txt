@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(offboard_controller)
+project(offboard_controller_lib)
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(Eigen3 REQUIRED)
@@ -14,9 +14,9 @@ target_include_directories(helper PUBLIC
 target_link_libraries(helper Eigen3::Eigen)
 
 # offb_ctrl lib
-add_library(offb_ctrl src/offb_ctrl.cpp)
-target_link_libraries(offb_ctrl helper)
+add_library(offboard_controller_lib src/offb_ctrl.cpp)
+target_link_libraries(offboard_controller_lib helper)
 
 # main test node
 add_executable(main src/test.cpp)
-target_link_libraries(main offb_ctrl)
+target_link_libraries(main offboard_controller_lib)
