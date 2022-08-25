@@ -47,7 +47,7 @@ Eigen::Vector3d offboard_controller::OffbCtrl::calDesiredAcceleration(const Eige
 
     Eigen::Vector3d acc_desired = a_fb + acc_cmd - gravity_;
 
-    return accel_des;
+    return acc_desired;
 }
 
 Eigen::Vector4d offboard_controller::OffbCtrl::calDesiredAttitude(const Eigen::Vector3d &accel_desired, const double &yaw_ref){
@@ -67,5 +67,5 @@ double offboard_controller::OffbCtrl::calDesiredThrottle(const Eigen::Vector3d &
 	    throttle = (cmd_theoretical - 0.06) * ratio;
     }
 
-    return;
+    return throttle;
 }

@@ -30,7 +30,8 @@ namespace offboard_controller
                  std::vector<double> thrust_coeff,
                  std::vector<double> volt_coeff,
                  double max_acc,
-                 double throttle_offset_);
+                 double throttle_offset,
+                 std::vector<double> thrust_original);
 
         ~OffbCtrl();
         /** @brief parameter setter*/
@@ -47,22 +48,22 @@ namespace offboard_controller
         // void setMaxAcc(double max_acc); // will not change after set
 
         /** @brief parameter getter*/
-        double getMass(double mass){return mass_};
+        double getMass(double mass){return mass_;};
 
-        Eigen::Vector3d getPosGains(Eigen::Vector3d pos_gain){return pos_gain_};
-        Eigen::Vector3d getVelGains(Eigen::Vector3d vel_gain){return vel_gain_};
+        Eigen::Vector3d getPosGains(Eigen::Vector3d pos_gain){return pos_gain_;};
+        Eigen::Vector3d getVelGains(Eigen::Vector3d vel_gain){return vel_gain_;};
 
-        std::vector<double> getThrustCoeff(std::vector<double> thrust_coeff){return thrust_coeff_};
-        std::vector<double> getVoltCoeff(std::vector<double> volt_coeff){return volt_coeff_};
+        std::vector<double> getThrustCoeff(std::vector<double> thrust_coeff){return thrust_coeff_;};
+        std::vector<double> getVoltCoeff(std::vector<double> volt_coeff){return volt_coeff_;};
 
-        double getThrottleOffset(double throttle_offset){return throttle_offset_};
+        double getThrottleOffset(double throttle_offset){return throttle_offset_;};
 
-        double getMaxAcc(double max_acc){return max_acc_};
+        double getMaxAcc(double max_acc){return max_acc_;};
 
         Eigen::Vector3d calDesiredAcceleration(const Eigen::Vector3d &pos_err, const Eigen::Vector3d &vel_err, const Eigen::Vector3d &acc_cmd);
         Eigen::Vector4d calDesiredAttitude(const Eigen::Vector3d &accel_desired, const double &yaw_ref);
         double calDesiredThrottle(const Eigen::Vector3d &accel_desired, const Eigen::Vector4d &curr_att_quat, const double &battery_volt, const bool voltage_compensation);
-    }
+    };
 
 } // namespace offboard_controller
 
