@@ -4,21 +4,19 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(Eigen3 REQUIRED)
 
-include_directories(
-    ${EIGEN3_INCLUDE_DIRS} 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-# include_directories(${EIGEN3_INCLUDE_DIRS} include)
+# helper lib
+add_library(helper src/helper.cpp)
 
-add_library(offb_ctrl src/offb_ctrl.cpp)
-add_library(helper INTERFACE)
-
-add_executable(main src/test.cpp)
-
-target_link_libraries(helper)
-target_link_libraries(offb_ctrl helper eigen)
-target_link_libraries(main offb_ctrl)
-
-target_include_directories (main PUBLIC
+target_include_directories(helper PUBLIC
     ${EIGEN3_INCLUDE_DIRS}
-    ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    ${PROJECT_SOURCE_DIR}/include)
+
+target_link_libraries(helper Eigen3::Eigen)
+
+# offb_ctrl lib
+add_library(offb_ctrl src/offb_ctrl.cpp)
+target_link_libraries(offb_ctrl helper)
+
+# main test node
+add_executable(main src/test.cpp)
+target_link_libraries(main offb_ctrl)
