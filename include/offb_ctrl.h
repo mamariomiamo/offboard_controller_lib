@@ -24,16 +24,16 @@ namespace offboard_controller
         double throttle_offset_;
 
     public:
-        OffbCtrl(double mass, 
-                 Eigen::Vector3d pos_gain, 
-                 Eigen::Vector3d vel_gain, 
+        OffbCtrl(double mass,
+                 Eigen::Vector3d pos_gain,
+                 Eigen::Vector3d vel_gain,
                  std::vector<double> thrust_coeff,
                  std::vector<double> volt_coeff,
                  double max_acc,
                  double throttle_offset,
                  std::vector<double> thrust_original);
 
-        ~OffbCtrl();
+        ~OffbCtrl() = default;
         /** @brief parameter setter*/
         // void setMass(double mass); // will not change after set
 
@@ -48,17 +48,17 @@ namespace offboard_controller
         // void setMaxAcc(double max_acc); // will not change after set
 
         /** @brief parameter getter*/
-        double getMass(double mass){return mass_;};
+        double getMass() { return mass_; };
 
-        Eigen::Vector3d getPosGains(Eigen::Vector3d pos_gain){return pos_gain_;};
-        Eigen::Vector3d getVelGains(Eigen::Vector3d vel_gain){return vel_gain_;};
+        Eigen::Vector3d getPosGains() { return pos_gain_; };
+        Eigen::Vector3d getVelGains() { return vel_gain_; };
 
-        std::vector<double> getThrustCoeff(std::vector<double> thrust_coeff){return thrust_coeff_;};
-        std::vector<double> getVoltCoeff(std::vector<double> volt_coeff){return volt_coeff_;};
+        std::vector<double> getThrustCoeff() { return thrust_coeff_; };
+        std::vector<double> getVoltCoeff() { return volt_coeff_; };
 
-        double getThrottleOffset(double throttle_offset){return throttle_offset_;};
+        double getThrottleOffset() { return throttle_offset_; };
 
-        double getMaxAcc(double max_acc){return max_acc_;};
+        double getMaxAcc() { return max_acc_; };
 
         Eigen::Vector3d calDesiredAcceleration(const Eigen::Vector3d &pos_err, const Eigen::Vector3d &vel_err, const Eigen::Vector3d &acc_cmd);
         Eigen::Vector4d calDesiredAttitude(const Eigen::Vector3d &accel_desired, const double &yaw_ref);
@@ -66,8 +66,3 @@ namespace offboard_controller
     };
 
 } // namespace offboard_controller
-
-// timing 730 end?
-// dinner where?
-// can drone first then tour and dinner?
-// lab tech, duration of safety meeting, how many ppl can join the safety meeting
