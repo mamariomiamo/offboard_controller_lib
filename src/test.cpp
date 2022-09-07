@@ -9,15 +9,28 @@ int main(int argc, char** argv)
     double voltage = 11.1;
     if(argc > 1)
         voltage = std::stod(argv[1]);
-    double mass = 195.5; 
+    // mock-mini parameters
+    // double mass = 195.5; 
+    // Eigen::Vector3d pos_gain = Eigen::Vector3d(1.0, 1.0, 1.0);
+    // Eigen::Vector3d vel_gain = Eigen::Vector3d(1.0, 1.0, 1.0); 
+    // std::vector<double> thrust_coeff{202.33, 145.56, -8.0219};
+    // std::vector<double> volt_coeff{-0.1088, 2.1964};
+    // double max_acc{10.0};
+    // double throttle_offset{0.06};
+    // double throttle_limit{0.5};
+    // std::vector<double> thrust_original{0.02, 0.01};
+
+    // mockjay parameters
+    double mass = 747; 
     Eigen::Vector3d pos_gain = Eigen::Vector3d(1.0, 1.0, 1.0);
     Eigen::Vector3d vel_gain = Eigen::Vector3d(1.0, 1.0, 1.0); 
-    std::vector<double> thrust_coeff{202.33, 145.56, -8.0219};
-    std::vector<double> volt_coeff{-0.1088, 2.1964};
+    std::vector<double> thrust_coeff{765.66, 158.09, 1.5923};
+    std::vector<double> volt_coeff{-0.0905, 2.3895};
     double max_acc{10.0};
-    double throttle_offset{0.06};
+    double throttle_offset{0.16};
     double throttle_limit{0.5};
     std::vector<double> thrust_original{0.02, 0.01};
+       
     offboard_controller::OffbCtrl controller(mass, pos_gain, vel_gain, thrust_coeff, volt_coeff, max_acc, throttle_offset, throttle_limit, thrust_original);
 
     // std::cout << "mass is: " << controller.getMass() << std::endl;
